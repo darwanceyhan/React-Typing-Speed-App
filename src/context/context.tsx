@@ -1,17 +1,20 @@
 import axios from "axios";
 import React, { createContext } from "react";
 
-export const Context = createContext({
+export interface SpeedAppInterface {
+  Data: Array<string>;
+  GetStringData: () => void;
+}
+export const Context = createContext<SpeedAppInterface>({
   Data: [],
   GetStringData: () => {},
 });
 
 export class SpeedAppContext extends React.Component<{
-  childern: React.ReactNode;
+  children: React.ReactNode;
 }> {
   state = {
     Data: Array<string>,
-    GetStringData: () => {},
   };
   GetStringData() {
     axios
@@ -24,9 +27,17 @@ export class SpeedAppContext extends React.Component<{
       });
   }
 
-  render() {
+  render(): JSX.Element {
+    const { Data } = this.state;
+    const { GetStringData } = this;
+
     return (
-      <Context.Provider value={this.state}>
+      <Context.Provider
+        value={{
+          Data,
+          GetStringData,
+        }}
+      >
         {this.props.children}
       </Context.Provider>
     );

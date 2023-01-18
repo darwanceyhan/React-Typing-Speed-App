@@ -1,9 +1,14 @@
 import React from "react";
-
-import "./App.css";
-
-function App() {
-  return <div className="App"></div>;
+import Input from "./component/Input";
+import { SpeedAppProvider } from "./context/context";
+export class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <SpeedAppProvider>
+          <Input />
+        </SpeedAppProvider>
+      </div>
+    );
+  }
 }
-
-export default App;
