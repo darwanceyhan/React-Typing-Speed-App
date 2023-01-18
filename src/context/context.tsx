@@ -7,7 +7,7 @@ export interface SpeedAppInterface {
 }
 export const Context = createContext<SpeedAppInterface>({
   Data: [],
-  GetStringData: () => {},
+  GetStringData: () => void 0,
 });
 
 export class SpeedAppProvider extends React.Component<{
@@ -16,16 +16,16 @@ export class SpeedAppProvider extends React.Component<{
   state = {
     Data: [],
   };
-  GetStringData() {
-    axios
+  GetStringData = () => {
+    void axios
       .get("https://random-word-api.herokuapp.com/word?number=12")
       .then((res) => {
-        this.setState({ Data: res.data });
+        this.setState({ Data: res.data as string[] });
       })
       .then(() => {
         console.log(this.state.Data);
       });
-  }
+  };
 
   render(): JSX.Element {
     const { Data } = this.state;
