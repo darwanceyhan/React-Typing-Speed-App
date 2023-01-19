@@ -8,6 +8,7 @@ export const Context = createContext<SpeedAppInterface>({
   GetStringChecking: () => void 0,
   isİncluded: false,
   i: 0,
+  DataQuery: [],
 });
 
 export class SpeedAppProvider extends Component<{
@@ -18,6 +19,7 @@ export class SpeedAppProvider extends Component<{
     InputData: "" as string,
     isIncluded: false,
     i: 0,
+    DataQuery: [] as boolean[],
   };
   GetStringData = () => {
     axios
@@ -30,21 +32,20 @@ export class SpeedAppProvider extends Component<{
       });
   };
   GetStringChecking = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ InputData: e.target.value });
-    if (this.state.Data[this.state.i].includes(this.state.InputData)) {
-      this.setState({ isIncluded: true });
-      if (e.target.value === this.state.Data[this.state.i]) {
+    if (e.target.value.includes(" ")) {
+      if (this.state.Data[this.state.i].includes(e.target.value)) {
+        this.state.DataQuery.push(true);
         this.setState({ i: this.state.i + 1 });
-        this.setState({ InputData: "" });
-        console.log("doğru");
+      } else {
+        this.state.DataQuery.push(false);
+        this.setState({ i: this.state.i + 1 });
       }
-    } else {
-      this.setState({ isIncluded: false });
+      this.setState({ InputData: "" });
     }
   };
 
   render(): JSX.Element {
-    const { Data, InputData, i } = this.state;
+    const { Data, InputData, i, DataQuery } = this.state;
     const { GetStringData, GetStringChecking } = this;
 
     return (
@@ -56,6 +57,7 @@ export class SpeedAppProvider extends Component<{
           GetStringChecking,
           isİncluded: this.state.isIncluded,
           i,
+          DataQuery,
         }}
       >
         {this.props.children}

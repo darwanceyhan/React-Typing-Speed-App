@@ -5,4 +5,5 @@ export interface SpeedAppInterface {
   GetStringChecking: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isİncluded: boolean;
   i: number;
+  DataQuery: boolean[];
 }

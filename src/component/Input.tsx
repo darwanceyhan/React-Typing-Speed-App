@@ -5,19 +5,17 @@ export default class Input extends Component {
   static contextType = Context;
   context!: React.ContextType<typeof Context>;
   componentDidMount(): void {
-    this.context.GetStringData();
-  }
-
-  componentDidUpdate(): void {
-    if (this.context.i === 12) {
+    if (this.context.i === 0 || this.context.i === 12) {
+      this.context.GetStringData();
     }
   }
+
   render(): JSX.Element {
     return (
       <div>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-6 mx-auto">
+            <div className="col-sm-6 mx-auto" style={{ userSelect: "none" }}>
               {this.context.Data &&
                 this.context.Data.map((item) => {
                   return <>{item + " "}</>;
