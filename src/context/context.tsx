@@ -31,16 +31,36 @@ export class SpeedAppProvider extends Component<{
         console.log(this.state.Data);
       });
   };
+  async DataContinueReset(): Promise<void> {
+    await this.setState({ InputData: [] });
+    await this.GetStringData();
+    this.setState({ i: 0 });
+  }
   GetStringChecking = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.includes(" ")) {
-      if (this.state.Data[this.state.i].includes(e.target.value)) {
+    this.setState({ InputData: e.target.value });
+
+    if (this.state.InputData.includes(" ")) {
+      if (
+        this.state.Data[this.state.i].includes(
+          this.state.InputData.replace(" ", "")
+        )
+      ) {
         this.state.DataQuery.push(true);
         this.setState({ i: this.state.i + 1 });
+        this.setState({ InputData: "" });
+        console.log(this.state.DataQuery);
+        if (this.state.i === 11) {
+          this.DataContinueReset();
+        }
       } else {
         this.state.DataQuery.push(false);
         this.setState({ i: this.state.i + 1 });
+        this.setState({ InputData: "" });
+        console.log(this.state.DataQuery);
+        if (this.state.i === 11) {
+          this.DataContinueReset();
+        }
       }
-      this.setState({ InputData: "" });
     }
   };
 
