@@ -38,10 +38,11 @@ export class SpeedAppProvider extends Component<{
   }
   GetStringChecking = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ InputData: e.target.value });
+    console.log(this.state.InputData);
 
     if (this.state.InputData.includes(" ")) {
       if (
-        this.state.Data[this.state.i].includes(
+        !this.state.Data[this.state.i].includes(
           this.state.InputData.replace(" ", "")
         )
       ) {
@@ -52,7 +53,11 @@ export class SpeedAppProvider extends Component<{
         if (this.state.i === 11) {
           this.DataContinueReset();
         }
-      } else {
+      } else if (
+        this.state.InputData.replace(" ", "") === "" ||
+        this.state.InputData.replace(" ", "").includes(this.state.InputData) ===
+          false
+      ) {
         this.state.DataQuery.push(false);
         this.setState({ i: this.state.i + 1 });
         this.setState({ InputData: "" });
