@@ -4,21 +4,16 @@ import { Context } from "../context/context";
 export default class Input extends Component {
   static contextType = Context;
   context!: React.ContextType<typeof Context>;
-  componetDidMount() {
+  componentDidMount(): void {
     this.context.GetStringData();
   }
-  render() {
+
+  render(): JSX.Element {
     return (
       <div>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-3">
-              <button
-                className="btn btn-primary"
-                onClick={this.context.GetStringData}
-              ></button>
-            </div>
-            <div className="col-sm-6">
+            <div className="col-sm-6 mx-auto">
               {this.context.Data &&
                 this.context.Data.map((item) => {
                   return <>{item + " "}</>;
