@@ -1,16 +1,13 @@
 import axios from "axios";
 import React, { createContext } from "react";
-
-export interface SpeedAppInterface {
-  Data: string[];
-  GetStringData: () => void;
-}
+import { SpeedAppInterface } from "./SpeedAppInterface";
+import { Component } from "react";
 export const Context = createContext<SpeedAppInterface>({
   Data: [],
   GetStringData: () => void 0,
 });
 
-export class SpeedAppProvider extends React.Component<{
+export class SpeedAppProvider extends Component<{
   children: React.ReactNode;
 }> {
   state = {

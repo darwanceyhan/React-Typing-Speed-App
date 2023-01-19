@@ -15,7 +15,16 @@ export default class Input extends Component {
                 onClick={this.context.GetStringData}
               ></button>
             </div>
-            <div className="col-sm-6">{this.context.Data}</div>
+            <div className="col-sm-6">
+              {this.context.Data &&
+                this.context.Data.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <p>{item}</p>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
