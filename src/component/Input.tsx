@@ -8,6 +8,10 @@ export default class Input extends Component {
     this.context.GetStringData();
   }
 
+  componentDidUpdate(): void {
+    if (this.context.i === 12) {
+    }
+  }
   render(): JSX.Element {
     return (
       <div>
@@ -26,7 +30,7 @@ export default class Input extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Enter String"
-                value={this.context.CheckData}
+                value={this.context.InputData}
                 onChange={this.context.GetStringChecking}
               />
             </div>
