@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { createContext } from "react";
+import React, { createContext, Component } from "react";
 import { SpeedAppInterface } from "./SpeedAppInterface";
-import { Component } from "react";
 export const Context = createContext<SpeedAppInterface>({
   Data: [],
   GetStringData: () => void 0,
+  CheckData: "",
+  GetStringChecking: () => void 0,
 });
 
 export class SpeedAppProvider extends Component<{
@@ -12,6 +13,7 @@ export class SpeedAppProvider extends Component<{
 }> {
   state = {
     Data: [],
+    CheckData: "",
   };
   GetStringData = () => {
     void axios
@@ -23,16 +25,22 @@ export class SpeedAppProvider extends Component<{
         console.log(this.state.Data);
       });
   };
+  GetStringChecking = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ CheckData: e.target.value });
+    console.log(this.state.CheckData);
+  };
 
   render(): JSX.Element {
-    const { Data } = this.state;
-    const { GetStringData } = this;
+    const { Data, CheckData } = this.state;
+    const { GetStringData, GetStringChecking } = this;
 
     return (
       <Context.Provider
         value={{
           Data,
           GetStringData,
+          CheckData,
+          GetStringChecking,
         }}
       >
         {this.props.children}

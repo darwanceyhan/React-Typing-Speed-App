@@ -4,6 +4,9 @@ import { Context } from "../context/context";
 export default class Input extends Component {
   static contextType = Context;
   context!: React.ContextType<typeof Context>;
+  componetDidMount() {
+    this.context.GetStringData();
+  }
   render() {
     return (
       <div>
@@ -28,6 +31,8 @@ export default class Input extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Enter String"
+                value={this.context.CheckData}
+                onChange={this.context.GetStringChecking}
               />
             </div>
           </div>
