@@ -7,7 +7,7 @@ export default class Input extends Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="container mt-5">
           <div className="row">
             <div className="col-sm-3">
               <button
@@ -17,13 +17,18 @@ export default class Input extends Component {
             </div>
             <div className="col-sm-6">
               {this.context.Data &&
-                this.context.Data.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <p>{item}</p>
-                    </div>
-                  );
+                this.context.Data.map((item) => {
+                  return <>{item + " "}</>;
                 })}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-6 mx-auto mt-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter String"
+              />
             </div>
           </div>
         </div>
