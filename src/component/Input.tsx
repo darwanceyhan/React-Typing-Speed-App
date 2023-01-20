@@ -13,10 +13,24 @@ export default class Input extends Component {
       <div>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-6 mx-auto">
+            <div className="col-sm-6 mx-auto d-inline-block">
               {this.context.Data &&
-                this.context.Data.map((item) => {
-                  return <>{item + " "}</>;
+                this.context.Data.map((item, index) => {
+                  return (
+                    index++,
+                    (
+                      <p
+                        key={index}
+                        className={`${
+                          this.context.DataQuery[index - 1]
+                            ? "text-success"
+                            : "text-danger"
+                        }`}
+                      >
+                        {item}
+                      </p>
+                    )
+                  );
                 })}
             </div>
           </div>

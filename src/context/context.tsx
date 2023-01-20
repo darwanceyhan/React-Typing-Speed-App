@@ -7,6 +7,7 @@ export const Context = createContext<SpeedAppInterface>({
   InputData: "",
   GetInputData: () => void 0,
   i: 0,
+  key: 0,
   DataQuery: [],
   GetStringQuery: () => void 0,
 });
@@ -19,11 +20,13 @@ export class SpeedAppProvider extends Component<{
     InputData: "" as string,
     isIncluded: false,
     i: 0,
+    key: 0,
     DataQuery: [] as boolean[],
   };
+
   GetStringData = () => {
     axios
-      .get("https://random-word-api.herokuapp.com/word?number=12")
+      .get("https://random-word-api.herokuapp.com/word?number=12&lang=en")
       .then((res) => {
         this.setState({ Data: res.data as string[] });
       })
@@ -67,7 +70,7 @@ export class SpeedAppProvider extends Component<{
   };
 
   render(): JSX.Element {
-    const { Data, InputData, i, DataQuery } = this.state;
+    const { Data, InputData, i, DataQuery, key } = this.state;
     const { GetStringData, GetInputData, GetStringQuery } = this;
 
     return (
@@ -78,6 +81,7 @@ export class SpeedAppProvider extends Component<{
           InputData,
           GetInputData,
           i,
+          key,
           DataQuery,
           GetStringQuery,
         }}

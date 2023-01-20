@@ -4,6 +4,7 @@ export interface SpeedAppInterface {
   InputData: string;
   GetInputData: (e: React.ChangeEvent<HTMLInputElement>) => void;
   i: number;
+  key: number;
   DataQuery: boolean[];
   GetStringQuery: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
