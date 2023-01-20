@@ -27,7 +27,8 @@ export default class Input extends Component {
                 className="form-control"
                 placeholder="Enter String"
                 value={this.context.InputData}
-                onChange={this.context.GetStringChecking}
+                onKeyUp={this.context.GetStringQuery}
+                onChange={this.context.GetInputData}
               />
             </div>
           </div>

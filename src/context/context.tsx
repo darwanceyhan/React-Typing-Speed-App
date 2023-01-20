@@ -5,10 +5,10 @@ export const Context = createContext<SpeedAppInterface>({
   Data: [],
   GetStringData: () => void 0,
   InputData: "",
-  GetStringChecking: () => void 0,
-  isİncluded: false,
+  GetInputData: () => void 0,
   i: 0,
   DataQuery: [],
+  GetStringQuery: () => void 0,
 });
 
 export class SpeedAppProvider extends Component<{
@@ -32,20 +32,21 @@ export class SpeedAppProvider extends Component<{
       });
   };
   async DataContinueReset(): Promise<void> {
-    await this.setState({ InputData: [] });
+    await this.setState({ InputData: "" });
     await this.GetStringData();
     this.setState({ i: 0 });
   }
-  GetStringChecking = (e: React.ChangeEvent<HTMLInputElement>) => {
+  GetInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ InputData: e.target.value });
+  };
+  GetStringQuery = (e: React.KeyboardEvent<HTMLInputElement>) => {
     console.log(this.state.InputData);
 
-    if (this.state.InputData.includes(" ")) {
+    if (e.key === " ") {
       if (
-        !this.state.Data[this.state.i].includes(
-          this.state.InputData.replace(" ", "")
-        )
+        this.state.Data[this.state.i] === this.state.InputData.replace(" ", "")
       ) {
+        console.log("true");
         this.state.DataQuery.push(true);
         this.setState({ i: this.state.i + 1 });
         this.setState({ InputData: "" });
@@ -53,11 +54,7 @@ export class SpeedAppProvider extends Component<{
         if (this.state.i === 11) {
           this.DataContinueReset();
         }
-      } else if (
-        this.state.InputData.replace(" ", "") === "" ||
-        this.state.InputData.replace(" ", "").includes(this.state.InputData) ===
-          false
-      ) {
+      } else {
         this.state.DataQuery.push(false);
         this.setState({ i: this.state.i + 1 });
         this.setState({ InputData: "" });
@@ -71,7 +68,7 @@ export class SpeedAppProvider extends Component<{
 
   render(): JSX.Element {
     const { Data, InputData, i, DataQuery } = this.state;
-    const { GetStringData, GetStringChecking } = this;
+    const { GetStringData, GetInputData, GetStringQuery } = this;
 
     return (
       <Context.Provider
@@ -79,10 +76,10 @@ export class SpeedAppProvider extends Component<{
           Data,
           GetStringData,
           InputData,
-          GetStringChecking,
-          isİncluded: this.state.isIncluded,
+          GetInputData,
           i,
           DataQuery,
+          GetStringQuery,
         }}
       >
         {this.props.children}

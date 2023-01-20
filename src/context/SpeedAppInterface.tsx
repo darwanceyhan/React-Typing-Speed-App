@@ -1,9 +1,9 @@
 export interface SpeedAppInterface {
-  Data: string[]; // string[] is an array of strings
+  Data: string[];
   GetStringData: () => void;
   InputData: string;
-  GetStringChecking: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isİncluded: boolean;
+  GetInputData: (e: React.ChangeEvent<HTMLInputElement>) => void;
   i: number;
   DataQuery: boolean[];
+  GetStringQuery: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
