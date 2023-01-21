@@ -1,4 +1,5 @@
 export interface SpeedAppInterface {
+  DataContinueReset(): Promise<void>;
   Data: string[];
   GetStringData: () => void;
   InputData: string;
@@ -7,4 +8,6 @@ export interface SpeedAppInterface {
   key: number;
   DataQuery: boolean[];
   GetStringQuery: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  time: number;
+  SavedData: boolean[];
 }
