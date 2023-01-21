@@ -19,7 +19,6 @@ export class SpeedAppProvider extends Component<{
     Data: [] as string[],
     SavedData: [] as boolean[],
     InputData: "" as string,
-    isIncluded: false,
     i: 1,
     key: 0,
     DataQuery: [] as boolean[],
