@@ -7,6 +7,15 @@ export default class Input extends Component {
   componentDidMount(): void {
     this.context.GetStringData();
   }
+  setStringStyle = (index: number): string => {
+    if (this.context.DataQuery[index - 1]) {
+      return "text-success text-decoration-line-through";
+    } else if (this.context.DataQuery[index - 1] === false) {
+      return "text-danger text-decoration-line-through";
+    } else {
+      return "text-primary";
+    }
+  };
 
   render(): JSX.Element {
     return (
@@ -19,16 +28,17 @@ export default class Input extends Component {
                   return (
                     index++,
                     (
-                      <p
+                      <h5
                         key={index}
-                        className={`${
-                          this.context.DataQuery[index - 1]
-                            ? "text-success"
-                            : "text-danger"
+                        className={`${this.setStringStyle(index)}
+                        ${
+                          this.context.i === index - 1
+                            ? "text-decoration-underline"
+                            : ""
                         }`}
                       >
                         {item}
-                      </p>
+                      </h5>
                     )
                   );
                 })}
