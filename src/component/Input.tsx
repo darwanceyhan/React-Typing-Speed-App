@@ -32,7 +32,7 @@ export default class Input extends Component {
                         key={index}
                         className={`${this.setStringStyle(index)}
                         ${
-                          this.context.i === index - 1
+                          this.context.i - 1 === index - 1
                             ? "text-decoration-underline"
                             : ""
                         }`}

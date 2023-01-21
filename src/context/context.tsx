@@ -6,7 +6,7 @@ export const Context = createContext<SpeedAppInterface>({
   GetStringData: () => void 0,
   InputData: "",
   GetInputData: () => void 0,
-  i: 0,
+  i: 1,
   key: 0,
   DataQuery: [],
   GetStringQuery: () => void 0,
@@ -17,9 +17,10 @@ export class SpeedAppProvider extends Component<{
 }> {
   state = {
     Data: [] as string[],
+    SavedData: [] as boolean[],
     InputData: "" as string,
     isIncluded: false,
-    i: 0,
+    i: 1,
     key: 0,
     DataQuery: [] as boolean[],
   };
@@ -28,16 +29,21 @@ export class SpeedAppProvider extends Component<{
     axios
       .get("https://random-word-api.herokuapp.com/word?number=12&lang=en")
       .then((res) => {
-        this.setState({ Data: res.data as string[] });
+        this.setState({ Data: res.data });
       })
       .then(() => {
         console.log(this.state.Data);
       });
   };
   async DataContinueReset(): Promise<void> {
+    await this.setState({
+      SavedData: this.state.SavedData.concat(this.state.DataQuery),
+    });
+    await this.setState({ DataQuery: [] });
     await this.setState({ InputData: "" });
     await this.GetStringData();
-    this.setState({ i: 0 });
+    this.setState({ i: 1 });
+    console.log(this.state.SavedData);
   }
   GetInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ InputData: e.target.value });
@@ -47,14 +53,15 @@ export class SpeedAppProvider extends Component<{
 
     if (e.key === " ") {
       if (
-        this.state.Data[this.state.i] === this.state.InputData.replace(" ", "")
+        this.state.Data[this.state.i - 1] ===
+        this.state.InputData.replace(" ", "")
       ) {
         console.log("true");
         this.state.DataQuery.push(true);
         this.setState({ i: this.state.i + 1 });
         this.setState({ InputData: "" });
         console.log(this.state.DataQuery);
-        if (this.state.i === 11) {
+        if (this.state.i % 12 === 0) {
           this.DataContinueReset();
         }
       } else {
@@ -62,7 +69,7 @@ export class SpeedAppProvider extends Component<{
         this.setState({ i: this.state.i + 1 });
         this.setState({ InputData: "" });
         console.log(this.state.DataQuery);
-        if (this.state.i === 11) {
+        if (this.state.i % 12 === 0) {
           this.DataContinueReset();
         }
       }
