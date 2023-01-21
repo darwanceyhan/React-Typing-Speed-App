@@ -91,6 +91,23 @@ export default class Input extends Component {
                   }}
                 />
                 <span className="input-group-text">{this.state.time}</span>
+                <button
+                  className="input-group-text"
+                  style={{ backgroundColor: "GrayText" }}
+                  onClick={() => {
+                    this.context.ResetAllData();
+                    this.setState({ time: 60 });
+                    clearInterval(this.interval);
+                    this.setState({ timeWork: false });
+                    this.context.GetStringData();
+                  }}
+                >
+                  <img
+                    src="https://img.icons8.com/ios/50/000000/refresh.png"
+                    alt="refresh"
+                    width="20px"
+                  />
+                </button>
               </div>
             </div>
           </div>
@@ -99,7 +116,7 @@ export default class Input extends Component {
             <div className="row">
               <div className="col-sm-6 mx-auto mt-3">
                 <div className="card">
-                  <div className="card-body">
+                  <div className="card-body w-25">
                     <h5 className="card-title">Result</h5>
                     <p className="card-text">
                       True :{" "}
@@ -114,8 +131,6 @@ export default class Input extends Component {
                           .length
                       }
                     </p>
-
-                    <button className="btn btn-primary">Continue</button>
                   </div>
                 </div>
               </div>

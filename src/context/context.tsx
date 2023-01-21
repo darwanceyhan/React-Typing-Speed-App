@@ -13,6 +13,7 @@ export const Context = createContext<SpeedAppInterface>({
   time: 60,
   DataContinueReset: () => Promise.resolve(),
   SavedData: [],
+  ResetAllData: () => void 0,
 });
 
 export class SpeedAppProvider extends Component<{
@@ -26,6 +27,15 @@ export class SpeedAppProvider extends Component<{
     key: 0,
     DataQuery: [] as boolean[],
     time: 60,
+  };
+  ResetAllData = () => {
+    this.setState({ Data: [] });
+    this.setState({ SavedData: [] });
+    this.setState({ InputData: "" });
+    this.setState({ i: 1 });
+    this.setState({ key: 0 });
+    this.setState({ DataQuery: [] });
+    this.setState({ time: 60 });
   };
 
   GetStringData = () => {
@@ -82,7 +92,7 @@ export class SpeedAppProvider extends Component<{
 
   render(): JSX.Element {
     const { Data, InputData, i, DataQuery, key, time, SavedData } = this.state;
-    const { GetStringData, GetInputData, GetStringQuery } = this;
+    const { GetStringData, GetInputData, GetStringQuery, ResetAllData } = this;
 
     return (
       <Context.Provider
@@ -98,6 +108,7 @@ export class SpeedAppProvider extends Component<{
           time,
           DataContinueReset: this.DataContinueReset,
           SavedData,
+          ResetAllData,
         }}
       >
         {this.props.children}

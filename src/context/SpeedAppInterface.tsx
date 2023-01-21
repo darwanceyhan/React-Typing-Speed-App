@@ -10,4 +10,5 @@ export interface SpeedAppInterface {
   GetStringQuery: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   time: number;
   SavedData: boolean[];
+  ResetAllData: () => void;
 }
