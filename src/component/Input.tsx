@@ -22,26 +22,29 @@ export default class Input extends Component {
       <div>
         <div className="container mt-5">
           <div className="row">
-            <div className="col-sm-6 mx-auto d-inline-block">
-              {this.context.Data &&
-                this.context.Data.map((item, index) => {
-                  return (
-                    index++,
-                    (
-                      <h5
-                        key={index}
-                        className={`${this.setStringStyle(index)}
+            <div className="col-sm-6 mx-auto" style={{ fontSize: "28px" }}>
+              <pre>
+                {this.context.Data &&
+                  this.context.Data.map((item, index) => {
+                    return (
+                      index++,
+                      (
+                        <b
+                          key={index}
+                          className={`${this.setStringStyle(index)}
                         ${
                           this.context.i - 1 === index - 1
                             ? "text-decoration-underline"
                             : ""
                         }`}
-                      >
-                        {item}
-                      </h5>
-                    )
-                  );
-                })}
+                        >
+                          {item}
+                          {index % 3 === 0 ? <br /> : " "}
+                        </b>
+                      )
+                    );
+                  })}
+              </pre>
             </div>
           </div>
           <div className="row">
