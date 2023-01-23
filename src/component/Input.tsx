@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Context } from "../context/context";
+import "../style/index.css";
 
 export default class Input extends Component {
   static contextType = Context;
@@ -31,7 +32,7 @@ export default class Input extends Component {
     } else if (this.context.DataQuery[index - 1] === false) {
       return "text-danger text-decoration-line-through";
     } else {
-      return "text-dark ";
+      return "text-light ";
     }
   };
 
@@ -43,9 +44,9 @@ export default class Input extends Component {
             <div
               className="col-sm-6 mx-auto"
               style={{
-                fontSize: "26px",
+                fontSize: "25px",
                 userSelect: "none",
-                backgroundColor: "#f8c291",
+
                 borderRadius: "10px",
               }}
             >
@@ -79,6 +80,7 @@ export default class Input extends Component {
                 <input
                   type="text"
                   className="form-control text-center text-dark"
+                  disabled={this.state.time <= 0}
                   placeholder="Enter String"
                   value={this.context.InputData}
                   onKeyUp={this.context.GetStringQuery}
@@ -90,10 +92,16 @@ export default class Input extends Component {
                     }
                   }}
                 />
-                <span className="input-group-text">{this.state.time}</span>
-                <button
+                <span
                   className="input-group-text"
-                  style={{ backgroundColor: "GrayText" }}
+                  style={{
+                    color: this.state.time >= 20 ? "green" : "red",
+                  }}
+                >
+                  {this.state.time}
+                </span>
+                <button
+                  className="input-group-text restartbutton"
                   onClick={() => {
                     this.context.ResetAllData();
                     this.setState({ time: 60 });
@@ -112,27 +120,26 @@ export default class Input extends Component {
             </div>
           </div>
 
-          {this.state.time <= 0 && (
+          {this.state.time >= 0 && (
             <div className="row">
-              <div className="col-sm-6 mx-auto mt-3">
-                <div className="card">
-                  <div className="card-body w-25">
-                    <h5 className="card-title">Result</h5>
-                    <p className="card-text">
-                      True :{" "}
-                      {
-                        this.context.SavedData.filter((item) => item === true)
-                          .length
-                      }
-                      <br />
-                      False :{" "}
-                      {
-                        this.context.SavedData.filter((item) => item === false)
-                          .length
-                      }
-                    </p>
-                  </div>
-                </div>
+              <div className="col-sm-4 mx-auto text-center results">
+                <b>
+                  {
+                    this.context.SavedData.filter((item) => item === true)
+                      .length
+                  }
+                  {" DKS"}
+                </b>
+                <br />
+                <hr />
+
+                <b>
+                  False:{" "}
+                  {
+                    this.context.SavedData.filter((item) => item === false)
+                      .length
+                  }
+                </b>
               </div>
             </div>
           )}
