@@ -44,7 +44,8 @@ export default class Input extends Component {
             <div
               className="col-sm-6 mx-auto"
               style={{
-                fontSize: "25px",
+                fontSize: "24px",
+
                 userSelect: "none",
 
                 borderRadius: "10px",
@@ -93,9 +94,10 @@ export default class Input extends Component {
                   }}
                 />
                 <span
-                  className="input-group-text"
+                  className="input-group-text font"
                   style={{
                     color: this.state.time >= 20 ? "green" : "red",
+                    fontSize: "25px",
                   }}
                 >
                   {this.state.time}
@@ -120,21 +122,21 @@ export default class Input extends Component {
             </div>
           </div>
 
-          {this.state.time <= 0 && (
+          {this.state.time >= 0 && (
             <div className="row">
-              <div className="col-sm-4 mx-auto text-center results">
-                <b>
+              <div className="col-sm-4 mx-auto text-center results font">
+                {"You write: "}
+                <b className="text-success">
                   {
                     this.context.SavedData.filter((item) => item === true)
                       .length
                   }
-                  {" DKS"}
+                  {" Per a minute"}
                 </b>
                 <br />
                 <hr />
-
-                <b>
-                  False:{" "}
+                False:{" "}
+                <b className="text-danger">
                   {
                     this.context.SavedData.filter((item) => item === false)
                       .length

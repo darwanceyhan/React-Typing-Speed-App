@@ -12,9 +12,10 @@
   animation-duration: 1s;
   animation-fill-mode: forwards;
   position: relative;
-
+  font-family: Pixel;
   padding: 10px;
 }
+
 @keyframes showResults {
   from {
     left: -30px;
