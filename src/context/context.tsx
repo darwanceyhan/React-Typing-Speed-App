@@ -37,27 +37,38 @@ export class SpeedAppProvider extends Component<{
     this.setState({ DataQuery: [] });
     this.setState({ time: 60 });
   };
-
+  async TrueInput(): Promise<void> {
+    await this.setState({ i: this.state.i + 1 });
+    await this.setState({ InputData: "" });
+    await this.state.DataQuery.push(true);
+    await this.setState({
+      SavedData: this.state.SavedData.concat(this.state.DataQuery),
+    });
+  }
+  async FalseIput(): Promise<void> {
+    await this.setState({ i: this.state.i + 1 });
+    await this.setState({ InputData: "" });
+    await this.state.DataQuery.push(false);
+    await this.setState({
+      SavedData: this.state.SavedData.concat(this.state.DataQuery),
+    });
+  }
   GetStringData = () => {
     axios
       .get("https://random-word-api.herokuapp.com/word?number=12&lang=en")
       .then((res) => {
         this.setState({ Data: res.data });
-      })
-      .then(() => {
-        console.log(this.state.Data);
       });
   };
 
   async DataContinueReset(): Promise<void> {
-    await this.setState({
+    this.setState({
       SavedData: this.state.SavedData.concat(this.state.DataQuery),
     });
     await this.setState({ DataQuery: [] });
     await this.setState({ InputData: "" });
     await this.GetStringData();
-    this.setState({ i: 1 });
-    console.log(this.state.SavedData);
+    await this.setState({ i: 1 });
   }
   GetInputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ InputData: e.target.value });
@@ -70,19 +81,13 @@ export class SpeedAppProvider extends Component<{
         this.state.Data[this.state.i - 1] ===
         this.state.InputData.replace(" ", "")
       ) {
-        console.log("true");
-        this.state.DataQuery.push(true);
-        this.setState({ i: this.state.i + 1 });
-        this.setState({ InputData: "" });
-        console.log(this.state.DataQuery);
+        this.TrueInput();
+
         if (this.state.i % 12 === 0) {
           this.DataContinueReset();
         }
       } else {
-        this.state.DataQuery.push(false);
-        this.setState({ i: this.state.i + 1 });
-        this.setState({ InputData: "" });
-        console.log(this.state.DataQuery);
+        this.FalseIput();
         if (this.state.i % 12 === 0) {
           this.DataContinueReset();
         }
