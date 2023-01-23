@@ -44,10 +44,8 @@ export default class Input extends Component {
         <div className="container mt-5">
           <div className="row">
             <div
-              className="col-sm-6 mx-auto"
+              className="col-sm-6 mx-auto textFont"
               style={{
-                fontSize: "24px",
-
                 userSelect: "none",
 
                 borderRadius: "10px",
