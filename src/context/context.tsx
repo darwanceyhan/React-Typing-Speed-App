@@ -38,20 +38,16 @@ export class SpeedAppProvider extends Component<{
     this.setState({ time: 60 });
   };
   async TrueInput(): Promise<void> {
+    await this.state.DataQuery.push(true);
+    await this.state.SavedData.push(true);
     await this.setState({ i: this.state.i + 1 });
     await this.setState({ InputData: "" });
-    await this.state.DataQuery.push(true);
-    await this.setState({
-      SavedData: this.state.SavedData.concat(this.state.DataQuery),
-    });
   }
   async FalseIput(): Promise<void> {
+    await this.state.DataQuery.push(false);
+    await this.state.SavedData.push(false);
     await this.setState({ i: this.state.i + 1 });
     await this.setState({ InputData: "" });
-    await this.state.DataQuery.push(false);
-    await this.setState({
-      SavedData: this.state.SavedData.concat(this.state.DataQuery),
-    });
   }
   GetStringData = () => {
     axios
@@ -62,9 +58,6 @@ export class SpeedAppProvider extends Component<{
   };
 
   async DataContinueReset(): Promise<void> {
-    this.setState({
-      SavedData: this.state.SavedData.concat(this.state.DataQuery),
-    });
     await this.setState({ DataQuery: [] });
     await this.setState({ InputData: "" });
     await this.GetStringData();
@@ -74,8 +67,6 @@ export class SpeedAppProvider extends Component<{
     this.setState({ InputData: e.target.value });
   };
   GetStringQuery = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(this.state.InputData);
-
     if (e.key === " ") {
       if (
         this.state.Data[this.state.i - 1] ===

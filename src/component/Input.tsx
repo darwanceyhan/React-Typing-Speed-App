@@ -60,7 +60,7 @@ export default class Input extends Component {
                           key={index}
                           className={`${this.setStringStyle(index)}
                         ${
-                          this.context.i - 1 === index - 1
+                          this.context.i === index
                             ? "text-decoration-underline"
                             : ""
                         }`}
@@ -120,7 +120,7 @@ export default class Input extends Component {
             </div>
           </div>
 
-          {this.state.time >= 0 && (
+          {this.state.time <= 0 && (
             <div className="row">
               <div className="col-sm-4 mx-auto text-center results">
                 <b>
