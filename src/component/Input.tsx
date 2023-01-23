@@ -120,7 +120,7 @@ export default class Input extends Component {
             </div>
           </div>
 
-          {this.state.time >= 0 && (
+          {this.state.time <= 55 && (
             <div className="row">
               <div className="col-sm-4 mx-auto text-center results">
                 <b>

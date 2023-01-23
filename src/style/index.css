@@ -8,6 +8,22 @@
   border-color: #1e251e;
   border-style: groove;
   box-shadow: 10px 10px 5px #888888;
+  animation-name: showResults;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  position: relative;
+
+  padding: 10px;
+}
+@keyframes showResults {
+  from {
+    left: -30px;
+    opacity: 0;
+  }
+  to {
+    left: 0px;
+    opacity: 1;
+  }
 }
 .restartbutton {
   background-color: grey;
