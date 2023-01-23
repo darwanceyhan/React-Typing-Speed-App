@@ -28,9 +28,11 @@ export default class Input extends Component {
 
   setStringStyle = (index: number): string => {
     if (this.context.DataQuery[index - 1]) {
-      return "text-success text-decoration-line-through";
+      return "text-success";
     } else if (this.context.DataQuery[index - 1] === false) {
-      return "text-danger text-decoration-line-through";
+      return "text-danger";
+    } else if (this.context.i == index) {
+      return "text-primary";
     } else {
       return "text-light ";
     }
@@ -60,11 +62,7 @@ export default class Input extends Component {
                         <b
                           key={index}
                           className={`${this.setStringStyle(index)}
-                        ${
-                          this.context.i === index
-                            ? "text-decoration-underline"
-                            : ""
-                        }`}
+                        `}
                         >
                           {item}
                           {index % 3 === 0 ? <br /> : " "}
@@ -80,7 +78,8 @@ export default class Input extends Component {
               <div className="input-group mt-3">
                 <input
                   type="text"
-                  className="form-control text-center text-dark"
+                  className="form-control text-center text-dark font"
+                  style={{ backgroundColor: "bisque", fontSize: "25px" }}
                   disabled={this.state.time <= 0}
                   placeholder="Enter String"
                   value={this.context.InputData}
@@ -122,9 +121,14 @@ export default class Input extends Component {
             </div>
           </div>
 
-          {this.state.time >= 0 && (
+          {this.state.time <= 0 && (
             <div className="row">
-              <div className="col-sm-4 mx-auto text-center results font">
+              <div
+                className="col-sm-4 mx-auto text-center results font"
+                style={{
+                  backgroundColor: "bisque",
+                }}
+              >
                 {"You write: "}
                 <b className="text-success">
                   {
