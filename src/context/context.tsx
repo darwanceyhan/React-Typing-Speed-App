@@ -67,7 +67,7 @@ export class SpeedAppProvider extends Component<{
     this.setState({ InputData: e.target.value });
   };
   GetStringQuery = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Spacebar") {
+    if (e.key === " ") {
       if (
         this.state.Data[this.state.i - 1] ===
         this.state.InputData.replace(" ", "")
